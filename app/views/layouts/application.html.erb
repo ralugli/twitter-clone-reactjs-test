@@ -10,8 +10,33 @@
 </head>
 <body>
 
-<%= yield %>
+  <nav>
+    <div class="nav-wrapper">
+      <div class="container">
+        <div class="right">
+          <% if user_signed_in? %>
+            Welcome
+            <u><%= link_to current_user.display_name, "/profile" %></u> -
+            <u><%= link_to "logout", destroy_user_session_path, method: :delete %></u>
+          <% else %>
+            Please
+            <%= link_to "login", new_user_session_path %>
+            or
+            <%= link_to "signup", new_user_registration_path %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </nav>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+<div class="container">
+  <p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p>
+
+  <%= yield %>
+
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
 </body>
 </html>
